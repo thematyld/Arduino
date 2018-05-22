@@ -16,7 +16,7 @@ void turnKey(byte numKey,unsigned int minTime,int device,unsigned long *lastTime
 //-----------------------------------------------------------------------------//
 void setup() {
   for(int i=0;i<KEY_COUNT;i++){
-    keyOn[i]=false;
+    keyOn[i]=true;
     prevTime[i]=0;
     pinMode(rele[i],OUTPUT);
     digitalWrite(rele[i],HIGH);
@@ -27,15 +27,12 @@ void setup() {
 }
 
 void loop() {
+  //Serial.println(prevTime[0]);
   turnKey(0,750,rele[0],&prevTime[0]);
-  turnKey(1,750,rele[1],&prevTime[1]);
+  //turnKey(1,750,rele[1],&prevTime[1]);
   if(irrecv.decode(&IRresult)){
     decodeIR();
     irrecv.resume();
-    if(keyOn[0]==true)
-      Serial.println("AAA");
-    else
-      Serial.println("NNN");
   }
   delay(10);
 }
@@ -43,12 +40,12 @@ void loop() {
 void decodeIR(){
   switch(IRresult.value){
     case 0xFF6897: IRturning(rele[0],&keyOn[0]);    break;
-    case 0xFF9867: Serial.println(" 2");    break;
+    case 0xFF9867: IRturning(rele[1],&keyOn[1]);    break;
     } 
   }
   
 void IRturning(int device,char *state){
-  if(state){
+  if(*state){
     digitalWrite(device,LOW);
     *state=false;  
   }
@@ -63,7 +60,6 @@ void turnKey(byte numKey,unsigned int minTime,int device,unsigned long *lastTime
     return;
   key[numKey]=digitalRead(keys[numKey]);
   unsigned int Time=millis()-(*lastTime);
-  
   if(!key[numKey] && Time>minTime){  
     (*lastTime)=millis();
     if(keyOn[numKey]==false){
