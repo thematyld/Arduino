@@ -1,3 +1,10 @@
+/**
+ * IR CONTROLLER
+ * @author Martin Bartos
+ * 2018
+ * IR settings
+ */
+
 void IRinit() {
   if (irrecv.decode(&IRresult)) {
     decodeIR();

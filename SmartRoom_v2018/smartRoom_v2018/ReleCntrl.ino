@@ -1,4 +1,23 @@
+/**
+ * RELE CONTROLLER
+ * @author Martin Bartos
+ * 2018
+ * Controller, which handle rele behavior
+ */
 
+void releInit(){
+  pinMode(RELE1, OUTPUT);
+  pinMode(RELE2, OUTPUT);
+  pinMode(RELE3, OUTPUT);
+  pinMode(RELE4, OUTPUT);
+  pinMode(pinVypL, INPUT);
+  pinMode(pinVypR, INPUT);
+
+  switchRele(RELE1, LOW);
+  switchRele(RELE2, LOW);
+  switchRele(RELE3, LOW);
+  switchRele(RELE4, LOW);
+}
 
 void changeState(int rele) {
   int device = 0, state = -1;

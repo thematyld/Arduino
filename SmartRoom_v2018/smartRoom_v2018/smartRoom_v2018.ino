@@ -1,3 +1,9 @@
+/**
+ * MAIN
+ * @author Martin Bartos
+ * 2018
+ */
+ 
 #include "IRremote.h"
 #include <assert.h>
 #include <Wire.h>
@@ -16,14 +22,21 @@ const int pinVypL = 7;
 LiquidCrystal_I2C lcd(0x3E,20,4); 
 IRrecv irrecv(IR);
 decode_results IRresult;
+//----------------Prototype-of-functions----------------
 
+//----------------ReleCntrl-----------------------------
+void releInit();
 void switchRele(int rele, int state);
 void changeState(int rele);
+//----------------IRcntrl-------------------------------
 void decodeIR();
-void externVyp();
 void IRinit();
+//----------------ExternVypinacCntrl--------------------
+void externVyp();
+//----------------DisplayCntrl--------------------------
 void showOnLcd(char** text,char** state,int rows,int cols);
-
+void showReleStateLcd(int stateDevice,String text,int row,int col);
+//------------------------------------------------------
 int stateVypL = LOW,
     stateVypR = LOW,
     previousL = HIGH,
@@ -33,26 +46,18 @@ int stateRele[4];
 void setup() {
   lcd.init();
   lcd.backlight();
-  lcd.setCursor(0,0);
-  lcd.print("Ahoj");
-  pinMode(RELE1, OUTPUT);
-  pinMode(RELE2, OUTPUT);
-  pinMode(RELE3, OUTPUT);
-  pinMode(RELE4, OUTPUT);
-  pinMode(pinVypL, INPUT);
-  pinMode(pinVypR, INPUT);
-
-  switchRele(RELE1, LOW);
-  switchRele(RELE2, LOW);
-  switchRele(RELE3, LOW);
-  switchRele(RELE4, LOW);
+  lcd.setCursor(5,0);
+  lcd.print("SmartHome");
+  releInit();
   previousL = digitalRead(pinVypL);
   previousR = digitalRead(pinVypR);
   irrecv.enableIRIn();
 }
 
 void loop() {
-  showReleStateLcd(stateRele[0],"Hlavni:",0,2);
+  showReleStateLcd(stateRele[0],"Hlavni      :",2,0);
+  showReleStateLcd(stateRele[1],"Podsvetleni :",3,0);
+  
   IRinit();
   externVyp();
   delay(10);

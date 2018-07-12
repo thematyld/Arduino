@@ -1,3 +1,10 @@
+/**
+ * EXTERN SWITCHES
+ * @author Martin Bartos
+ * 2018
+ * Manage behavior of extern switches onto box
+ */
+ 
 void externVyp() {
   stateVypL = digitalRead(pinVypL);
   stateVypR = digitalRead(pinVypR);
