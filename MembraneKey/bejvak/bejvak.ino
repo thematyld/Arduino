@@ -27,9 +27,8 @@ void setup() {
 }
 
 void loop() {
-  //Serial.println(prevTime[0]);
   turnKey(0,750,rele[0],&prevTime[0]);
-  //turnKey(1,750,rele[1],&prevTime[1]);
+  turnKey(1,750,rele[1],&prevTime[1]);
   if(irrecv.decode(&IRresult)){
     decodeIR();
     irrecv.resume();
@@ -39,7 +38,9 @@ void loop() {
 
 void decodeIR(){
   switch(IRresult.value){
+    case 0xFF40BF:
     case 0xFF6897: IRturning(rele[0],&keyOn[0]);    break;
+    case 0xFFEA15:
     case 0xFF9867: IRturning(rele[1],&keyOn[1]);    break;
     } 
   }
