@@ -1,3 +1,5 @@
+
+
 void changeState(int rele) {
   int device = 0, state = -1;
   switch (rele) {
