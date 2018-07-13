@@ -5,7 +5,9 @@
  * Show, how represent data to LCD display
  */
  
-void showOnLcd(String text,String state,int row,int col){
+#include "SmartRoomAPI.h"
+
+void showOnLcd(String text,String state,int col,int row){
   bool allowed=false;
   assert(row>=0 && col>=0); 
   if((text.length()+state.length()+col+1)<20)
@@ -23,12 +25,12 @@ void showOnLcd(String text,String state,int row,int col){
   }
 }
 
-void showReleStateLcd(int stateDevice,String text,int row,int col){
+void showReleStateLcd(int stateDevice,String text,int col,int row){
   String state="";
   if(stateDevice==HIGH)
     state="ON ";
   else
     state="OFF";
 
-  showOnLcd(text,state,row,col);
+  showOnLcd(text,state,col,row);
 }

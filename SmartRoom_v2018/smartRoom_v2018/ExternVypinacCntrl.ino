@@ -5,6 +5,8 @@
  * Manage behavior of extern switches onto box
  */
  
+#include "SmartRoomAPI.h"
+
 void externVyp() {
   stateVypL = digitalRead(pinVypL);
   stateVypR = digitalRead(pinVypR);

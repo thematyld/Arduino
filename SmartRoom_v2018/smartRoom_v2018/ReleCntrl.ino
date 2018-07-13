@@ -4,6 +4,8 @@
  * 2018
  * Controller, which handle rele behavior
  */
+ 
+#include "SmartRoomAPI.h"
 
 void releInit(){
   pinMode(RELE1, OUTPUT);

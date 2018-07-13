@@ -4,6 +4,8 @@
  * 2018
  * IR settings
  */
+ 
+#include "SmartRoomAPI.h"
 
 void IRinit() {
   if (irrecv.decode(&IRresult)) {
