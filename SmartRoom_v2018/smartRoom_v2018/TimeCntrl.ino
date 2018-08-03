@@ -6,20 +6,42 @@
 */
 
 #include "SmartRoomAPI.h"
-void turnOffCountDown(int device, long minutes) {
+void turnOffCountDown(int device, byte minutes) {
   DateTime now = RTC.now();
+  
+  if (countDownAble == true) {
+    if ((now.minute() + minutes) >= 60) {
+      reqHour = now.hour() + 1;
+      reqMinute = now.minute() - 60;
+    }
+    else{
+      reqHour=now.hour();
+      reqMinute=now.minute()+minutes;  
+    }
+    countDownAble = false;
+  }
+  else {
+    if ((now.hour() == reqHour) && (now.minute() == reqMinute)){
+      switchRele(device, LOW);
+      countDownAble=true;
+    }
+  }
+
+
 }
 
 void turnOffBacklight(byte startHour, byte startMinute, byte endHour, byte endMinute) {
   DateTime now = RTC.now();
-  if (now.hour() == startHour) {
-    if (now.minute() == startMinute)
-      lcd.noBacklight();
-  }
 
-  if (now.hour() == endHour) {
-    if (now.minute() == endMinute)
+  if ((now.hour() >= startHour) && (now.hour() <= endHour)) {
+    if ((now.minute() >= startMinute) && (now.minute() <= endMinute)) {
+      backlight = false;
+      lcd.noBacklight();
+    }
+    else {
+      backlight = true;
       lcd.backlight();
+    }
   }
 }
 

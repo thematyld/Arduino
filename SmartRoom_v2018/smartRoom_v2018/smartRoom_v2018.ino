@@ -34,6 +34,12 @@ int stateVypL = LOW,
     previousL = HIGH,
     previousR = HIGH;
 
+//TODO
+byte reqHour=0,reqMinute=0;
+
+
+bool backlight = true,
+    countDownAble=true;
 unsigned long prevTempTime = 0;
 
 int stateRele[4];
@@ -58,15 +64,15 @@ void setup() {
 
 void loop() {
   showReleStateLcd(stateRele[0], "Hlavni       :", 0, 2);
-  showReleStateLcd(stateRele[1], "Podsvetleni  :", 0, 3);
+  showReleStateLcd(stateRele[2], "Podsvetleni  :", 0, 3);
   IRinit();
   showTime(0, 0);
   showDate(12, 0);
   showTemp(8, 1, 2000, &prevTempTime);
   externVyp();
-  
-  turnOffBacklight(22,00,6,00);
+    turnOffBacklight(22, 00, 6, 00);
 
+  turnOffCountDown(RELE3,1);
   delay(10);
 }
 
