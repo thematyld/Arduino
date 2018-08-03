@@ -6,6 +6,22 @@
 */
 
 #include "SmartRoomAPI.h"
+void turnOffCountDown(int device, long minutes) {
+  DateTime now = RTC.now();
+}
+
+void turnOffBacklight(byte startHour, byte startMinute, byte endHour, byte endMinute) {
+  DateTime now = RTC.now();
+  if (now.hour() == startHour) {
+    if (now.minute() == startMinute)
+      lcd.noBacklight();
+  }
+
+  if (now.hour() == endHour) {
+    if (now.minute() == endMinute)
+      lcd.backlight();
+  }
+}
 
 void showTime(int col, int row) {
   //Hours
@@ -56,9 +72,10 @@ void showDate(int col, int row) {
     case 6:
       lcd.print("So");
       break;
-    case 7:
+    case 0:
       lcd.print("Ne");
       break;
+    default:;
   }
 }
 

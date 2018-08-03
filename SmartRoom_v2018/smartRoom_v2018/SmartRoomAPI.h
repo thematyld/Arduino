@@ -21,6 +21,7 @@ void showReleStateLcd(int stateDevice,String text,int row,int col);
 //-----------------RTC----------------------------------
 void showDate(int col, int row);
 void showTime(int col, int row);
+void turnOffBacklight(DateTime startTime,DateTime endTime);
 void readTime(byte *second, byte *minute, byte *hour, byte *dayOfWeek, byte *dayOfMonth, byte *month, byte *year);
 void setTime(byte second, byte minute, byte hour, byte dayOfWeek, byte dayOfMonth, byte month, byte year);
 byte decToBcd(byte val);

@@ -43,7 +43,7 @@ void setup() {
   analogReference(INTERNAL);
   Wire.begin();
   RTC.begin();
-  RTC.adjust(DateTime(__DATE__, __TIME__));
+  //RTC.adjust(DateTime(__DATE__, __TIME__));
   DateTime now = RTC.now();
   // RTC.adjust(now.unixtime() + 27);
 
@@ -64,6 +64,8 @@ void loop() {
   showDate(12, 0);
   showTemp(8, 1, 2000, &prevTempTime);
   externVyp();
+  
+  turnOffBacklight(22,00,6,00);
 
   delay(10);
 }
